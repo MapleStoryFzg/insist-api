@@ -27,7 +27,7 @@
                     <span class="glyphicon glyphicon-edit" title="编辑"></span>
                     <span class="glyphicon glyphicon-trash" title="删除"></span>
                 </div>
-                <span class="badge">$!interfaceCategoryEntity.interfaceCount</span></a>
+                <span class="badge">$!interfaceCategoryEntity.interfaceCount</span>
                 </a>
             </li>
         #end
@@ -155,6 +155,7 @@
             $("#myHttpModal").find("tbody").empty();
             $("#interfaceHttpIdInput").val("");
             document.getElementById('newInterfaceHttpForm').reset();
+            $("#myHttpModal select[name='categoryInput']").val($("#interfaceCategoryUList").find("li.active").attr("data-id"));
         });
 
         //新增RPC接口
@@ -163,6 +164,7 @@
             $("#myRpcModal").find("tbody").empty();
             $("#interfaceRpcIdInput").val("");
             document.getElementById('newInterfaceRpcForm').reset();
+            $("#myRpcModal select[name='categoryInput']").val($("#interfaceCategoryUList").find("li.active").attr("data-id"));
         });
 
         //新增HTTP接口
@@ -172,7 +174,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#myHttpModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             } else {
@@ -180,7 +182,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#myHttpModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             }
@@ -193,7 +195,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#myRpcModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             } else {
@@ -201,7 +203,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#myRpcModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             }
@@ -216,7 +218,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#deleteInterfaceModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             } else {
@@ -224,7 +226,7 @@
                     console.log(data);
                     if (data.success) {
                         $("#deleteInterfaceModal").modal("hide");
-                        window.location.reload();
+                        $("#interfaceCategoryUList").find(".active").trigger("click");
                     }
                 }, "json");
             }
