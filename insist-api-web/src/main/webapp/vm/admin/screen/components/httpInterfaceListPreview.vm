@@ -81,6 +81,7 @@
         //HTTP接口列表展示
         $.post("${ctxPath}/rest/interfaceHttp/findInterfaceHttpList", {"appId": "$!{appDO.appId}"}, function (data) {
             $("#httpTableTBody").handlebars($("#httpInterfaceTemplate"), data);
+            globalHttpData = data;
         }, "json");
 
         //HTTP接口编辑事件

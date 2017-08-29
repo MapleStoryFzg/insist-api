@@ -60,7 +60,7 @@
 </div>
 <div class="col-md-9">
     <br/>
-    <div class="text-left">
+    <div class="form-inline">
         <button type="button" id="addHttpInterfaceBtn" class="btn btn-info" data-toggle="modal"
                 data-target="#myHttpModal">新增HTTP接口
         </button>
@@ -68,7 +68,11 @@
                 data-target="#myHttpDomainModal">
             域名地址管理
         </button>
+        #*HTTP接口搜索框*#
+        <input type="text" class="form-control" id="searchHttpText" placeholder="请输入接口名称" style="width: 600px;">
+        <button class="btn btn-info btn-search" id="searchHttpInterface">搜索</button>
     </div>
+
     <br/>
     <table class="table table-bordered table-hover table-condensed" style="table-layout: fixed">
         <thead class="bg-primary">
@@ -89,10 +93,13 @@
         </tbody>
     </table>
     <br/>
-    <div class="text-left">
+    <div class="form-inline">
         <button type="button" id="addRpcInterfaceBtn" class="btn btn-info" data-toggle="modal"
                 data-target="#myRpcModal">新增 RPC 接口
         </button>
+        #*RPC接口搜索框*#
+        <input type="text" class="form-control" id="searchRpcText" placeholder="请输入接口名称" style="width: 600px;">
+        <button class="btn btn-info btn-search" id="searchRpcInterface">搜索</button>
     </div>
     <br/>
     <table class="table table-bordered table-hover table-condensed" style="table-layout: fixed">
@@ -147,6 +154,9 @@
 
 
 <script type="text/javascript">
+
+    window.globalHttpData = new Array();
+    window.globalRpcData = new Array();
     $(function () {
 
         //新增HTTP接口
@@ -231,6 +241,40 @@
                 }, "json");
             }
 
+        });
+
+        //前端搜索_HTTP接口
+        $("#searchHttpInterface").click(function () {
+            //获得搜索框里的字符串
+            var searchHttpText = $("#searchHttpText").val();
+            var searchResult = new Array();
+            if(searchHttpText == ""){
+                searchResult = globalHttpData;
+            }else{
+                $.each(globalHttpData,function (i,value) {
+                    if(value.name.indexOf(searchHttpText) >= 0){
+                        searchResult.push(this);
+                    }
+                })
+            }
+            $("#httpTableTBody").handlebars($("#httpInterfaceTemplate"), searchResult);//根据搜索接口重新渲染数据
+        });
+
+        //前端搜索_RPC接口
+        $("#searchRpcInterface").click(function () {
+            //获得搜索框里的字符串
+            var searchRpcText = $("#searchRpcText").val();
+            var searchResult = new Array();
+            if(searchRpcText == ""){
+                searchResult = globalRpcData;
+            }else{
+                $.each(globalRpcData,function (i,value) {
+                    if(value.name.indexOf(searchRpcText) >= 0){
+                        searchResult.push(this);
+                    }
+                })
+            }
+            $("#rpcTableTBody").handlebars($("#rpcInterfaceTemplate"), searchResult);//根据搜索接口重新渲染数据
         });
 
     });

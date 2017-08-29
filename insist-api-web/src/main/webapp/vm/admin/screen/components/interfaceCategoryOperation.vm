@@ -118,17 +118,19 @@
             $(this).addClass("active");
             var category = $(this).attr("data-id");
             $.post("${ctxPath}/rest/interfaceHttp/findInterfaceHttpList", {
-                        "appId": "$!{appDO.appId}",
-                        "category": category
-                    },
-                    function (data) {
-                        $("#httpTableTBody").handlebars($("#httpInterfaceTemplate"), data);
-                    }, "json");
+                "appId": "$!{appDO.appId}",
+                "category": category
+            },
+            function (data) {
+                $("#httpTableTBody").handlebars($("#httpInterfaceTemplate"), data);
+                globalHttpData = data;
+            }, "json");
             $.post("${ctxPath}/rest/interfaceRpc/findInterfaceRpcList", {
                 "appId": "$!{appDO.appId}",
                 "category": category
             }, function (data) {
                 $("#rpcTableTBody").handlebars($("#rpcInterfaceTemplate"), data);
+                globalRpcData = data;
             }, "json");
         });
 
